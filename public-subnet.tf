@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "tf-igw" {
 
 }
 
-resource "aws_route_table" "public-RT" {
+resource "aws_route_table" "public-rt" {
       vpc_id = "${aws_vpc.my_tf_app.id}"
 
       route = {
@@ -31,5 +31,5 @@ resource "aws_route_table" "public-RT" {
 resource "aws_route_table_association" "pub_sub" {
   count = "${length(local.az_names)}"
   subnet_id = "${local.pub_sub_id[count.index]}"
-  route_table_id = "${aws_route_table.prt.id}"
+  route_table_id = "${aws_route_table.public-rt.id}"
 }
